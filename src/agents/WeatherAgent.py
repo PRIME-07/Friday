@@ -1,95 +1,112 @@
-# Imports
 import os
 from openai import OpenAI
-from pydantic import BaseModel, Field
 from dotenv import load_dotenv
 from tools.weatherTool import WeatherTool
 
 # Load .env file
 load_dotenv()
 
+
 class WeatherAgent:
     def __init__(self):
         self.client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
         self.weather_tool = WeatherTool()
 
-        # Define tools
-        self.tools = [
-            # Weather tool
+        # system prompt
+        self.system_prompt = """
+            You are the Weather Agent of WingMan, a hyper-personalized assistant. You provide weather information in a helpful,
+            friendly and concise manner.
+            Include the relevant details such as the location, local time, temperature, humidity, cloud cover, precipitation, rain, and when relevant,
+            add practical implications like (e.g., "Might want to use sunscreen" or "Stay hydrated" or "Might want to grab an umbrella").
+            Present the information in a way that is conversational and engaging.
+            """
+
+    def check_location(self, user_query: str):
+        """Analyze user query to determine location intent using natural language understanding."""
+        messages = [
             {
-                "type": "function",
-                "function": {
-                    "name": "get_weather",
-                    "description": "Get current temperature for provided coordinates in celsius.",
-                    "parameters": {
-                        "type": "object",
-                        "properties": {
-                            "latitude": {"type": "number"},
-                            "longitude": {"type": "number"},
-                        },
-                        "required": ["latitude", "longitude"],
-                        "additionalProperties": False,
-                    },
-                    "strict": True,
-                },
-            }
-            # add more tools here...
+                "role": "system",
+                "content": """
+                You are WingMan's location analyzer. Your task is to determine if the user is asking about:
+                1. Current location weather (e.g., "how's the weather?" or "is it going to rain?")
+                2. Specific location weather (e.g., "weather in New York" or "how's London looking?")
+                
+                For specific locations, extract ONLY the location name, no additional words.
+                For current location queries, respond with "current_location".
+                """
+            },
+            {"role": "user", "content": user_query},
         ]
 
-        # system prompt
-        self.system_prompt = ("""
-            You are a weather agent. You are tasked with providing the current weather
-            information for a given location.
-            You have access to a weather tool that can fetch the current weather data 
-            for a given set of GPS coordinates. You can use this tool to get 
-            information such as current temperature, cloud cover, precipitation, 
-            rain, relative humidity, wind speed, and weather code. 
-            Provide a brief summary using data such as temperature, cloud cover,
-            and precipitation, rain, humidity and wind speed.
-            """
+        completion = self.client.chat.completions.create(
+            model="gpt-4",
+            messages=messages
         )
 
-    def get_weather_info(self, user_query: str):
-        """Process user query and get weather information."""
+        # Get the response and clean it
+        location = completion.choices[0].message.content.strip()
+        
+        # Check if it's current location
+        is_current = location.lower() == "current_location"
+        
+        return {
+            "current_location": is_current,
+            "location": None if is_current else location
+        }
+
+    def format_weather_response(self, weather_data, location_data):
+        """Generate a natural language response from weather data using GPT."""
+        location_context = "your location" if location_data[
+            "current_location"] else location_data["location"]
+
+        # Add local time to the context
+        local_time = weather_data.get("local_time", "")
+        
         messages = [
             {"role": "system", "content": self.system_prompt},
-            {"role": "user", "content": user_query.lower()},
+            {
+                "role": "user",
+                "content": f"Create a weather summary for {location_context} (Local time: {local_time}) based on this data: {weather_data}"
+            }
         ]
 
-        # Create completion
         completion = self.client.chat.completions.create(
-            model="gpt-4o",
-            messages=messages,
-            tools=self.tools,
+            model="gpt-4",
+            messages=messages
         )
 
-        # Dump model response
-        completion.model_dump()
-
-        # Define response model
-        class WeatherResponse(BaseModel):
-            temperature: float = Field(description="The current temperature in celsius for the given location.")
-            response: str = Field(description="A natural language response to the user's question.")
-
-        # Call model again with response format
-        completion_2 = self.client.beta.chat.completions.parse(
-            model="gpt-4o",
-            messages=messages,
-            tools=self.tools,
-            response_format=WeatherResponse,
-        )
-
-        # Parse final response
-        final_response = completion_2.choices[0].message.parsed
-        final_response.temperature
-        final_response.response
-        return final_response.temperature, final_response.response
+        return completion.choices[0].message.content
 
     def handle_request(self, user_query: str):
         """Handles user request by fetching and returning weather information."""
         try:
-            temperature, response = self.get_weather_info(user_query)
-            return f"Wingman: {response}"
-        except Exception as e:
-            return f"Error processing request: {str(e)}"
+            # Step 1: Determine location type from user query
+            location_data = self.check_location(user_query)
+            
+            # Debug print
+            print(f"Debug - Location data: {location_data}")
 
+            # Step 2: Get coordinates using WeatherTool
+            location_coordinates = self.weather_tool.figure_out_location(location_data)
+            
+            # Debug print
+            print(f"Debug - Coordinates: {location_coordinates}")
+
+            if not location_coordinates:
+                return "WingMan: I couldn't pinpoint that location. Could you please specify the city name more clearly?"
+
+            # Step 3: Get weather data using coordinates
+            weather_data = self.weather_tool.get_weather(
+                latitude=location_coordinates["latitude"],
+                longitude=location_coordinates["longitude"]
+            )
+
+            if "error" in weather_data:
+                return f"WingMan: Oops! Ran into a snag: {weather_data['error']}"
+
+            # Step 4: Format the response using GPT
+            response = self.format_weather_response(weather_data, location_data)
+            return f"WingMan: {response}"
+
+        except Exception as e:
+            return f"WingMan: System error: {str(e)}"
