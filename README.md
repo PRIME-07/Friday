@@ -1,2 +1,2 @@
-# Friday
-Agentic AI approach to building AI assistants
+# WingMan:
+Personal assistant using Multi-Agent AI 
