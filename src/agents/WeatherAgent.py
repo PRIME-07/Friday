@@ -2,6 +2,7 @@ import os
 from openai import OpenAI
 from dotenv import load_dotenv
 from tools.weatherTool import WeatherTool
+from typing import Dict, Any
 
 # Load .env file
 load_dotenv()
@@ -20,6 +21,21 @@ class WeatherAgent:
             add practical implications like (e.g., "Might want to use sunscreen" or "Stay hydrated" or "Might want to grab an umbrella").
             Present the information in a way that is conversational and engaging.
             """
+
+    def _parse_location(self, query: str) -> Dict[str, Any]:
+        """Parse location information from query."""
+        # If no specific location mentioned, default to current location
+        location_keywords = ['in', 'at', 'for', 'of']
+        query_lower = query.lower()
+        
+        # If query doesn't contain location keywords, assume current location
+        if not any(keyword + ' ' in query_lower for keyword in location_keywords):
+            return {
+                'current_location': True,
+                'location': None
+            }
+            
+        # ... rest of location parsing logic ...
 
     def check_location(self, user_query: str):
         """Analyze user query to determine location intent using natural language understanding."""
