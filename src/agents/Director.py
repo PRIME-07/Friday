@@ -23,7 +23,11 @@ class Director:
             "web": WebSearchAgent()  # Add the new WebSearchAgent
         }
 
+        # Give EmailAgent a reference to the Director for context
+        self.agents["email"]._director = self
+        
         self.conversation_history = []  # Store conversation history
+        self.last_email_context = None  # Store context of last viewed email
         
         # Update system prompt to include web search capabilities
         self.system_prompt = """
@@ -148,67 +152,59 @@ class Director:
         """Analyze user request and determine whether to handle directly or delegate."""
         try:
             # Get conversation context
-            recent_messages = self.conversation_history[-3:]  # Get last 3 messages for context
+            recent_messages = self.conversation_history[-3:]
             
-            # Ask GPT to analyze the conversation and decide how to handle the request
             messages = [
                 {"role": "system", "content": """
                 You are WingMan's conversation analyzer. Analyze the conversation context and current query to determine the best way to handle it.
                 
-                You have access to:
-                1. Email Agent - for email related tasks
-                2. Weather Agent - for weather related tasks
-                3. Web Search Agent - for web search related tasks
-                4. Direct conversation - for general chat, follow-ups, reactions, and non-specialized queries
-
-                Return JSON in one of these formats:
-
-                For email tasks:
+                IMPORTANT: You must ALWAYS respond with a valid JSON object, nothing else.
+                
+                For web search tasks (use when user wants to find information, search, or learn about something):
                 {
-                    "agent": "email",
-                    "action": "read|send",
+                    "agent": "web",
+                    "action": "search",
                     "parameters": {
-                        "type": "unread|from_sender|search|send_new",
-                        "sender": "sender name or null",
-                        "query": "search query or null"
+                        "type": "quick",  # or "detailed" for complex queries
+                        "query": "user's search query"
                     },
-                    "reason": "why this should be handled by email agent"
+                    "reason": "user wants to search for information"
                 }
 
-                For weather tasks:
+                For weather tasks (use when user asks about weather, temperature, forecast):
                 {
                     "agent": "weather",
                     "action": "get_weather",
                     "parameters": {
                         "location": "location name or null",
-                        "current_location": true/false
+                        "current_location": true
                     },
-                    "reason": "why this should be handled by weather agent"
+                    "reason": "user wants weather information"
                 }
 
-                For web search tasks:
+                For email tasks (keep existing email handling):
                 {
-                    "agent": "web",
-                    "action": "search",
+                    "agent": "email",
+                    "action": "read|send|reply",
                     "parameters": {
-                        "type": "quick|detailed",
-                        "query": "search query"
-                    },
-                    "reason": "why this should be handled by web search agent"
+                        "type": "unread|from_sender|search|send_new",
+                        "sender": "sender name or null",
+                        "query": "email content or null"
+                    }
                 }
 
-                For general conversation:
+                For general conversation (when query doesn't match other agents):
                 {
                     "agent": "self",
                     "response": null,
-                    "reason": "why this should be handled as general conversation"
+                    "reason": "general conversation"
                 }
 
-                Examples:
-                1. "what unread mails do i have?" -> email agent (checking emails)
-                2. "what's the weather like?" -> weather agent (weather query)
-                3. "that's cool!" -> self (reaction to previous response)
-                4. "thanks!" -> self (general conversation)
+                Common patterns:
+                - Search/find/what is/tell me about -> web agent
+                - Weather/temperature/forecast -> weather agent
+                - Email/mail/inbox/send/reply -> email agent
+                - General chat/questions/advice -> self (general conversation)
                 """},
                 {"role": "user", "content": f"""
                 Recent conversation:
@@ -219,12 +215,12 @@ class Director:
 
                 Current query: {user_query}
 
-                Determine how to handle this query considering the conversation context.
+                Return ONLY a JSON object for handling this query.
                 """}
             ]
 
             completion = self.client.chat.completions.create(
-                model="gpt-4",
+                model="gpt-4o-mini",
                 messages=messages,
                 temperature=0
             )
@@ -237,14 +233,83 @@ class Director:
             elif response.startswith("```"):
                 response = response[3:-3]
             
-            analysis = json.loads(response.strip())
-            print(f"Debug - Analysis: {json.dumps(analysis, indent=2)}")  # Debug print
+            try:
+                import re
+                json_match = re.search(r'\{.*\}', response, re.DOTALL)
+                if json_match:
+                    response = json_match.group()
+            except:
+                pass
             
-            return analysis
+            try:
+                analysis = json.loads(response.strip())
+                print(f"Debug - Analysis: {json.dumps(analysis, indent=2)}")  # Debug print
+                return analysis
+            except json.JSONDecodeError:
+                # Smart fallback based on query content
+                query_lower = user_query.lower()
+                
+                # Check for weather-related queries
+                if any(x in query_lower for x in ["weather", "temperature", "forecast", "rain", "sunny"]):
+                    return {
+                        "agent": "weather",
+                        "action": "get_weather",
+                        "parameters": {
+                            "location": None,
+                            "current_location": True
+                        },
+                        "reason": "user wants weather information"
+                    }
+                
+                # Check for search-related queries
+                elif any(x in query_lower for x in ["search", "find", "what is", "what are", "tell me about", "how to"]):
+                    return {
+                        "agent": "web",
+                        "action": "search",
+                        "parameters": {
+                            "type": "quick",
+                            "query": user_query
+                        },
+                        "reason": "user wants to search for information"
+                    }
+                
+                # Check for email-related queries (keep existing email handling)
+                elif any(x in query_lower for x in ["read", "check", "mail", "inbox", "emails"]):
+                    return {
+                        "agent": "email",
+                        "action": "read",
+                        "parameters": {
+                            "type": "unread",
+                            "sender": None,
+                            "max_results": 5
+                        },
+                        "reason": "user wants to check their emails"
+                    }
+                
+                # Default to general conversation
+                return {
+                    "agent": "self",
+                    "response": None,
+                    "reason": "general conversation"
+                }
 
         except Exception as e:
             print(f"Analysis error: {e}")
-            # Default to self-handling for any errors
+            # Smart error fallback
+            query_lower = user_query.lower()
+            
+            if any(x in query_lower for x in ["search", "find", "what is", "what are", "tell me about"]):
+                return {
+                    "agent": "web",
+                    "action": "search",
+                    "parameters": {
+                        "type": "quick",
+                        "query": user_query
+                    },
+                    "reason": "user wants to search for information"
+                }
+            
+            # Default to self for general conversation
             return {
                 "agent": "self",
                 "response": None,
@@ -282,7 +347,7 @@ class Director:
             ]
 
             completion = self.client.chat.completions.create(
-                model="gpt-4",
+                model="gpt-4o-mini",
                 messages=messages,
                 temperature=0
             )
@@ -332,8 +397,8 @@ class Director:
                 - Maintain factual accuracy while adjusting presentation
                 
                 Example tone matches:
-                User: "hey what's the temp rn? 🌞"
-                → "It's a toasty 30°C out there! ☀️"
+                User: "hey what's the temp rn?"
+                → "It's a toasty 30°C out there!"
                 
                 User: "Could you check the current temperature?"
                 → "The current temperature is 30°C with clear conditions."
@@ -347,7 +412,7 @@ class Director:
             ]
 
             completion = self.client.chat.completions.create(
-                model="gpt-4",
+                model="gpt-4o-mini",
                 messages=messages,
                 temperature=0.7
             )
@@ -367,94 +432,111 @@ class Director:
             # Store the last used agent for context
             self.last_used_agent = analysis["agent"]
             
-            # Handle based on the analysis
             if analysis["agent"] == "self":
-                # Get recent context including previous responses
-                messages = self.get_recent_context()
-                messages.append({
-                    "role": "system",
-                    "content": """
-                    You are WingMan, a friendly and adaptive AI assistant. When responding:
-                    1. Match the user's tone and style:
-                       - If they're casual/informal, be casual too (use slang, emojis)
-                       - If they're formal, maintain professionalism
-                       - Mirror their energy level and enthusiasm
+                # Handle general conversation using GPT
+                messages = [
+                    {"role": "system", "content": """
+                    You are WingMan, a friendly and helpful AI assistant. Keep your responses:
+                    - Natural and conversational
+                    - Engaging and personable
+                    - Informative when needed
+                    - Brief but complete
+                    - Match the user's tone and energy
                     
-                    2. For information recall:
-                       - Check conversation history thoroughly
-                       - Reference previous messages naturally
-                       - Use casual language when recalling info
-                    
-                    3. Response style:
-                       - Keep it conversational and natural
-                       - Avoid formal/robotic phrases like "feel free to ask" or "I'm here to"
-                       - Use contractions (it's, that's, you're)
-                       - Add appropriate emojis for casual conversations
-                       - Keep responses concise
-                    
-                    Examples:
-                    User: "yo that's awesome!"
-                    Response: "Right? 🔥 Pretty sweet deal!"
-                    
-                    User: "ahh ok thanks"
-                    Response: "No worries! 👊"
-                    
-                    User: "can you remind me what they said about the price?"
-                    Response: "Yeah, they mentioned it was gonna be around $50 bucks 💰"
-                    """
-                })
-                messages.append({"role": "user", "content": f"""
-                Based on our chat history and this message: {user_query}
-                Give me a natural response that matches the conversation's vibe.
-                """})
-                
+                    You can handle casual chat, answer questions, give opinions, and engage in general conversation.
+                    Use emojis when appropriate to match the tone.
+                    """},
+                    # Add recent conversation context
+                    *[{
+                        "role": msg["role"],
+                        "content": msg["content"]
+                    } for msg in self.conversation_history[-5:]], # Last 5 messages for context
+                    {"role": "user", "content": user_query}
+                ]
+
                 completion = self.client.chat.completions.create(
-                    model="gpt-4",
+                    model="gpt-4o-mini",
                     messages=messages,
-                    temperature=0.7
+                    temperature=0.7  # Add some variety to responses
                 )
-                
+
                 response = completion.choices[0].message.content.strip()
-                
-                # Clean up any JSON formatting if present
-                try:
-                    parsed = json.loads(response)
-                    if isinstance(parsed, dict) and "response" in parsed:
-                        response = parsed["response"]
-                except:
-                    pass  # If it's not JSON, use the response as is
-                
                 self.add_to_history("assistant", response)
                 return response
+            
+            elif analysis["agent"] == "email":
+                agent = self.agents["email"]
                 
-            elif analysis["agent"] in self.agents:
-                agent = self.agents[analysis["agent"]]
-                if analysis["agent"] == "email":
-                    # Convert the analysis to the format EmailAgent expects
+                if analysis["action"] == "read":
+                    # Handle read email requests
                     email_request = {
-                        "action": "list_unread" if analysis["parameters"]["type"] == "unread" else "read_specific",
+                        "action": "read",
                         "parameters": {
+                            "type": analysis["parameters"].get("type", "unread"),
+                            "sender": analysis["parameters"].get("sender"),
                             "max_results": 5
                         }
                     }
-                    
-                    # If it's a specific sender request, add sender info
-                    if analysis["parameters"].get("sender"):
-                        email_request["action"] = "read_specific"
-                        email_request["parameters"]["sender"] = analysis["parameters"]["sender"]
-                    
-                    agent_response = agent.handle_request(email_request)
-                    formatted_response = self.format_response(agent_response, user_query)
-                    
-                    # Store both raw and formatted responses for email content
-                    self.add_to_history("assistant", formatted_response, {
-                        "type": "email",
-                        "raw_response": agent_response,
-                        "action": email_request["action"],
-                        "parameters": email_request["parameters"]
-                    })
-                    
-                elif analysis["agent"] == "weather":
+                elif analysis["action"] == "reply":
+                    # Check if this is a reply request
+                    if self.last_email_context:
+                        email_request = {
+                            "action": "reply",
+                            "parameters": {
+                                "message_id": self.last_email_context["id"],
+                                "to": self.last_email_context["sender"],
+                                "query": analysis["parameters"].get("query") or user_query
+                            }
+                        }
+                    else:
+                        response = "I'm not sure how to reply to that. Please ask me to read your mail first."
+                        self.add_to_history("assistant", response)
+                        return response
+                else:
+                    # Handle new email send requests
+                    # Check if this is a confirmation for a pending email
+                    if "yes" in user_query.lower():
+                        email_request = {
+                            "action": "send",
+                            "parameters": {
+                                "query": "yes"  # This signals to EmailAgent that it's a confirmation
+                            }
+                        }
+                    else:
+                        # Create a new email request
+                        email_request = {
+                            "action": "send",
+                            "parameters": {
+                                "to": analysis["parameters"].get("sender"),
+                                "query": analysis["parameters"].get("query"),
+                                "type": "send_new"
+                            }
+                        }
+                        
+                        # If the query contains an email address and content, make sure both are passed
+                        if '@' in user_query:
+                            email_parts = user_query.split(' ')
+                            for part in email_parts:
+                                if '@' in part:
+                                    email_request["parameters"]["to"] = part
+                                    # Remove the email address from the query to get clean content
+                                    email_request["parameters"]["query"] = user_query.replace(part, '').strip()
+                                    break
+                
+                agent_response = agent.handle_request(email_request)
+                formatted_response = self.format_response(agent_response, user_query)
+                self.add_to_history("assistant", formatted_response, {
+                    "type": "email",
+                    "raw_response": agent_response,
+                    "action": email_request["action"],
+                    "parameters": email_request["parameters"]
+                })
+                
+                return formatted_response
+                
+            elif analysis["agent"] in self.agents:
+                agent = self.agents[analysis["agent"]]
+                if analysis["agent"] == "weather":
                     # Weather agent expects string
                     agent_response = agent.handle_request(user_query)
                     formatted_response = self.format_response(agent_response, user_query)

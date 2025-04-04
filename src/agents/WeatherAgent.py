@@ -55,7 +55,7 @@ class WeatherAgent:
         ]
 
         completion = self.client.chat.completions.create(
-            model="gpt-4",
+            model="gpt-4o-mini",
             messages=messages
         )
 
@@ -87,7 +87,7 @@ class WeatherAgent:
         ]
 
         completion = self.client.chat.completions.create(
-            model="gpt-4",
+            model="gpt-4o-mini",
             messages=messages
         )
 

@@ -78,7 +78,7 @@ class WebSearchAgent:
         ]
         
         completion = self.client.chat.completions.create(
-            model="gpt-4",
+            model="gpt-4o-mini",
             messages=messages,
             temperature=0.7
         )
@@ -107,7 +107,7 @@ class WebSearchAgent:
         ]
         
         completion = self.client.chat.completions.create(
-            model="gpt-4",
+            model="gpt-4o-mini",
             messages=messages,
             temperature=0.7
         )

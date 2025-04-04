@@ -98,6 +98,969 @@
           }
         }
       ]
+    },
+    {
+      "id": 5,
+      "timestamp": "2025-03-07T11:20:34.470696",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Todays weather",
+          "timestamp": "2025-03-07T11:21:17.853594"
+        },
+        {
+          "role": "assistant",
+          "content": "It's a sunny day, mate! Temp's at 30.9°C, not too humid and no rain. Bit of a breeze going at 8.4 m/s. Stay cool and hydrated!",
+          "timestamp": "2025-03-07T11:21:35.515725",
+          "metadata": {
+            "agent": "weather"
+          }
+        },
+        {
+          "role": "user",
+          "content": "read an email related to API",
+          "timestamp": "2025-03-07T11:23:22.754923"
+        },
+        {
+          "role": "assistant",
+          "content": "Ran into a snag pulling up that email on the API, dude. Got a 'NoneType' object without a 'lower' attribute.",
+          "timestamp": "2025-03-07T11:23:29.800832",
+          "metadata": {
+            "agent": "email"
+          }
+        },
+        {
+          "role": "user",
+          "content": "read new emails",
+          "timestamp": "2025-03-07T11:23:57.085591"
+        },
+        {
+          "role": "assistant",
+          "content": "You have 5 new emails from Myntra, Dreamstime, Medium Daily Digest, TAAFT, and You.com. Which one should I open?",
+          "timestamp": "2025-03-07T11:24:04.490069",
+          "metadata": {
+            "agent": "email"
+          }
+        },
+        {
+          "role": "user",
+          "content": "what does Myntra say",
+          "timestamp": "2025-03-07T11:24:24.600066"
+        },
+        {
+          "role": "assistant",
+          "content": "\"Myntra's all about Women's Day vibes, offering gift cards and all. They've got everything from clothes to personal care stuff. Plus, shopping's a breeze - just sit at home and wait for the doorbell to ring!\"",
+          "timestamp": "2025-03-07T11:24:33.274341",
+          "metadata": {
+            "agent": "email"
+          }
+        },
+        {
+          "role": "user",
+          "content": "whats the fastest car",
+          "timestamp": "2025-03-07T11:25:02.682221"
+        },
+        {
+          "role": "assistant",
+          "content": "Fastest car rn is the Devel Sixteen, tops 347 mph! But if we talk about cars you can actually buy, the Koenigsegg Jesko Absolut wins at 330 mph. Crazy fast, right? 🚀🛣️",
+          "timestamp": "2025-03-07T11:25:17.679484",
+          "metadata": {
+            "agent": "web"
+          }
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "timestamp": "2025-03-20T07:51:05.487555",
+      "messages": [
+        {
+          "role": "user",
+          "content": "hey can you read my recent emails",
+          "timestamp": "2025-03-20T07:51:16.285132"
+        },
+        {
+          "role": "assistant",
+          "content": "You've got 5 unread emails! 📬 They’re from Medium Daily Digest, You.com, TAAFT, Zerodha, and F1 Unlocked! Which one you wanna check out?",
+          "timestamp": "2025-03-20T07:51:22.333778",
+          "metadata": {
+            "agent": "email"
+          }
+        },
+        {
+          "role": "user",
+          "content": "what does f1 unlocked say?",
+          "timestamp": "2025-03-20T07:51:55.033225"
+        },
+        {
+          "role": "assistant",
+          "content": "Yo Anuj! \n\nF1 Unlocked is running a sick contest for the Miami GP weekend! 🎉 You could snag premium tickets, lunch, a paddock tour with an F1 Ambassador, plus flights and a place to stay for you and three pals. It’s gonna be a blast! Just remember, entries close on April 2nd. Don’t sleep on it! \n\nCatch you later!",
+          "timestamp": "2025-03-20T07:52:01.130104",
+          "metadata": {
+            "agent": "email"
+          }
+        },
+        {
+          "role": "user",
+          "content": "can send an email to anujm0707@gmail.com asking for an update on the progress of the wingman project. See if they are available to meet today at 5pm to discuss the same.",
+          "timestamp": "2025-03-20T07:53:45.785030"
+        },
+        {
+          "role": "assistant",
+          "content": "I can't find any emails from Anuj in the unread messages. 🤔",
+          "timestamp": "2025-03-20T07:53:49.143706",
+          "metadata": {
+            "agent": "email"
+          }
+        },
+        {
+          "role": "user",
+          "content": "what's the weather like",
+          "timestamp": "2025-03-20T07:54:10.019611"
+        },
+        {
+          "role": "assistant",
+          "content": "Hey! 🌞 Here’s the weather scoop:\n\n- **Temp**: A nice 23.6°C\n- **Humidity**: 77% – a bit sticky!\n- **Skies**: Clear, no clouds – ideal for hangouts!\n- **Rain**: Nope, no rain today, so leave the umbrella.\n- **Wind**: Light breeze at 5.1 m/s.\n\nPerfect day to be outside! Just drink plenty of water. Enjoy! 😊",
+          "timestamp": "2025-03-20T07:54:22.181386",
+          "metadata": {
+            "agent": "weather"
+          }
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "timestamp": "2025-04-04T17:38:58.074472",
+      "messages": [
+        {
+          "role": "user",
+          "content": "hey can you read my mail?",
+          "timestamp": "2025-04-04T17:39:06.180988"
+        },
+        {
+          "role": "assistant",
+          "content": "You've got 5 unread emails! 📧 They’re from Myntra, Quora Suggested Spaces, TLDR, DataStax Astra Team, and Apple. Which one do you wanna check out?",
+          "timestamp": "2025-04-04T17:39:12.292805",
+          "metadata": {
+            "agent": "email"
+          }
+        },
+        {
+          "role": "user",
+          "content": "can you read the mail from Apple",
+          "timestamp": "2025-04-04T17:39:26.034818"
+        },
+        {
+          "role": "assistant",
+          "content": "Looks like the email from Apple is about your subscription renewal, but there's nothing to read in it.",
+          "timestamp": "2025-04-04T17:39:29.690617",
+          "metadata": {
+            "agent": "email"
+          }
+        },
+        {
+          "role": "user",
+          "content": "can you send an email to anujm0707@gmail.com saying that I throwing Birthday party on 7th april, at my house at 8pm and he is invited to join.",
+          "timestamp": "2025-04-04T17:40:30.161632"
+        },
+        {
+          "role": "assistant",
+          "content": "Oops, ran into a snag trying to get that email out! 😅 Can you double-check the details?",
+          "timestamp": "2025-04-04T17:40:32.808511",
+          "metadata": {
+            "agent": "email"
+          }
+        },
+        {
+          "role": "user",
+          "content": "can you send an email to anuj saying that I throwing Birthday party on 7th april, at my house at 8pm and he is invited to join",
+          "timestamp": "2025-04-04T17:40:52.006451"
+        },
+        {
+          "role": "assistant",
+          "content": "Gotcha! Just a heads up, I hit a snag with sending that email—seems like there’s a little glitch. I'll try again! 🎉",
+          "timestamp": "2025-04-04T17:40:55.311590",
+          "metadata": {
+            "agent": "email"
+          }
+        },
+        {
+          "role": "user",
+          "content": "send an email to amritesh inviting him to my birthday party on 7th april at 8 pm",
+          "timestamp": "2025-04-04T17:41:42.083458"
+        },
+        {
+          "role": "assistant",
+          "content": "Oops, ran into a snag trying to send that invite! 🤦‍♂️ Can you give me the details again?",
+          "timestamp": "2025-04-04T17:41:45.289982",
+          "metadata": {
+            "agent": "email"
+          }
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "timestamp": "2025-04-04T17:47:21.143406",
+      "messages": [
+        {
+          "role": "user",
+          "content": "send an email to amritesh inviting him to my birthday party on 7th april at 8 pm",
+          "timestamp": "2025-04-04T17:47:28.269366"
+        },
+        {
+          "role": "assistant",
+          "content": "Oops, I hit a snag trying to send that email. Looks like there's a little glitch!",
+          "timestamp": "2025-04-04T17:47:31.371263",
+          "metadata": {
+            "agent": "email"
+          }
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "timestamp": "2025-04-04T17:53:56.129574",
+      "messages": [
+        {
+          "role": "user",
+          "content": "send an email to amritesh inviting him to my birthday party on 7th april at 8 pm",
+          "timestamp": "2025-04-04T17:54:02.841842"
+        },
+        {
+          "role": "assistant",
+          "content": "Oops, I hit a snag while trying to write the email! Let’s try that again.",
+          "timestamp": "2025-04-04T17:54:13.920542",
+          "metadata": {
+            "agent": "email"
+          }
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "timestamp": "2025-04-04T17:54:29.980020",
+      "messages": [
+        {
+          "role": "user",
+          "content": "send an email to amritesh inviting him to my birthday party on 7th april at 8 pm",
+          "timestamp": "2025-04-04T17:54:32.118513"
+        },
+        {
+          "role": "assistant",
+          "content": "Sure thing! Just drop me Amritesh's email or address, and I'll shoot him the invite!",
+          "timestamp": "2025-04-04T17:54:36.222713",
+          "metadata": {
+            "agent": "email"
+          }
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "timestamp": "2025-04-04T17:57:17.219946",
+      "messages": [
+        {
+          "role": "user",
+          "content": "send an email to amritesh inviting him to my birthday party on 7th april at 8 pm",
+          "timestamp": "2025-04-04T17:57:20.536114"
+        },
+        {
+          "role": "assistant",
+          "content": "Sure thing! Just let me know Amritesh's email address, and I'll get that invite sent out!",
+          "timestamp": "2025-04-04T17:57:23.760884",
+          "metadata": {
+            "agent": "email"
+          }
+        },
+        {
+          "role": "user",
+          "content": "anujm0707@gmail.com",
+          "timestamp": "2025-04-04T17:57:34.684120"
+        },
+        {
+          "role": "assistant",
+          "content": "Yo, I need a name to send the email!",
+          "timestamp": "2025-04-04T17:57:37.758470",
+          "metadata": {
+            "agent": "email"
+          }
+        },
+        {
+          "role": "user",
+          "content": "send an email to anujm0707@gmail.com inviting him to my birthday party on 7th april at 8 pm",
+          "timestamp": "2025-04-04T17:57:56.863612"
+        },
+        {
+          "role": "assistant",
+          "content": "Oops, I hit a snag trying to send the invite! Let me know if you want me to try again.",
+          "timestamp": "2025-04-04T17:58:07.039674",
+          "metadata": {
+            "agent": "email"
+          }
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "timestamp": "2025-04-04T18:04:56.804824",
+      "messages": [
+        {
+          "role": "user",
+          "content": "send an email to anujm0707@gmail.com inviting him to my birthday party on 7th april at 8 pm",
+          "timestamp": "2025-04-04T18:05:00.257186"
+        },
+        {
+          "role": "assistant",
+          "content": "Sure thing! Just let me know what you want to say in the invite!",
+          "timestamp": "2025-04-04T18:05:02.661278",
+          "metadata": {
+            "agent": "email"
+          }
+        },
+        {
+          "role": "user",
+          "content": "invite them to attend my B-Day party on 7th April at my house at 8 pm",
+          "timestamp": "2025-04-04T18:05:33.967948"
+        },
+        {
+          "role": "assistant",
+          "content": "Sure thing! Just drop me the name or email of who you wanna invite, and I'll get that invite out! 🎉",
+          "timestamp": "2025-04-04T18:05:37.252006",
+          "metadata": {
+            "agent": "email"
+          }
+        },
+        {
+          "role": "user",
+          "content": "You: send an email to anujm0707@gmail.com inviting him to my birthday party on 7th april at 8 pm",
+          "timestamp": "2025-04-04T18:07:28.460256"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "timestamp": "2025-04-04T18:07:57.378929",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You: send an email to anujm0707@gmail.com inviting him to my birthday party on 7th april at 8 pm",
+          "timestamp": "2025-04-04T18:08:01.367016"
+        },
+        {
+          "role": "assistant",
+          "content": "Here's the email I've whipped up:\n\nTo: anujm0707@gmail.com  \nSubject: 🎉 You're Invited to My Birthday Bash on April 7th! 🎂\n\nHey Anuj!\n\nHope you’re doing awesome! I’m throwing a birthday party on April 7th at 8 PM and would love for you to come! There’ll be good food, music, and tons of fun!\n\nLet me know if you can make it! Can’t wait to celebrate! 🎈\n\nCheers,  \n[Your Name]\n\nShould I shoot this off? Just say 'yes' or let me know if you want any tweaks!",
+          "timestamp": "2025-04-04T18:08:10.544906",
+          "metadata": {
+            "agent": "email"
+          }
+        },
+        {
+          "role": "user",
+          "content": "yes",
+          "timestamp": "2025-04-04T18:08:24.312653"
+        },
+        {
+          "role": "assistant",
+          "content": "What do you want me to put in the email?",
+          "timestamp": "2025-04-04T18:08:26.572625",
+          "metadata": {
+            "agent": "email"
+          }
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "timestamp": "2025-04-04T18:11:24.141346",
+      "messages": [
+        {
+          "role": "user",
+          "content": "You: send an email to anujm0707@gmail.com inviting him to my birthday party on 7th april at 8 pm",
+          "timestamp": "2025-04-04T18:11:26.833286"
+        },
+        {
+          "role": "assistant",
+          "content": "Here's the email I whipped up:\n\nTo: anujm0707@gmail.com  \nSubject: You're Invited to My Birthday Party on April 7th!\n\nHey Anuj!\n\nI'm super excited to invite you to my birthday bash on April 7th at 8 PM! 🎉 It's gonna be a blast with food, music, and good vibes all around!\n\nLet me know if you can make it. Would love to see you there!\n\nCheers,  \n[Your Name]  \n\nShould I send this out? Just say 'yes' or let me know if you want any changes!",
+          "timestamp": "2025-04-04T18:11:41.783295",
+          "metadata": {
+            "agent": "email"
+          }
+        },
+        {
+          "role": "user",
+          "content": "yes",
+          "timestamp": "2025-04-04T18:11:51.779841"
+        },
+        {
+          "role": "assistant",
+          "content": "Awesome! Email's on its way! ✌️",
+          "timestamp": "2025-04-04T18:11:54.912273",
+          "metadata": {
+            "agent": "email"
+          }
+        },
+        {
+          "role": "user",
+          "content": "can you read my mail",
+          "timestamp": "2025-04-04T18:12:12.894852"
+        },
+        {
+          "role": "assistant",
+          "content": "Sure thing! Just drop me the email address or name of the person you wanna send it to.",
+          "timestamp": "2025-04-04T18:12:15.277624",
+          "metadata": {
+            "agent": "email"
+          }
+        },
+        {
+          "role": "user",
+          "content": "so do i have any new mail",
+          "timestamp": "2025-04-04T18:12:44.243211"
+        },
+        {
+          "role": "assistant",
+          "content": "Just need the email or name of the person you wanna send it to!",
+          "timestamp": "2025-04-04T18:12:47.887474",
+          "metadata": {
+            "agent": "email"
+          }
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "timestamp": "2025-04-04T18:15:15.891290",
+      "messages": [
+        {
+          "role": "user",
+          "content": "can you read my mail",
+          "timestamp": "2025-04-04T18:15:18.286754"
+        },
+        {
+          "role": "assistant",
+          "content": "You've got 5 unread emails! 📬 They’re from anujm0707@gmail.com, Zomato, Myntra, Quora Suggested Spaces, and TLDR. Which one you wanna check out?",
+          "timestamp": "2025-04-04T18:15:23.706944",
+          "metadata": {
+            "agent": "email"
+          }
+        },
+        {
+          "role": "user",
+          "content": "what does anujm0707@gmail.com say?",
+          "timestamp": "2025-04-04T18:15:38.396128"
+        },
+        {
+          "role": "assistant",
+          "content": "Yo Anuj! 🎉  \n\nYou're invited to my bday bash on April 7th at 8 PM! It's gonna be a blast with food, music, and good vibes! Let me know if you can make it—would love to see you!  \n\nCheers,  \nAnujm0707",
+          "timestamp": "2025-04-04T18:15:49.071011",
+          "metadata": {
+            "agent": "email"
+          }
+        },
+        {
+          "role": "user",
+          "content": "reply to it saying I'll be more than happy to join him to celebrate his birthday",
+          "timestamp": "2025-04-04T18:16:38.912404"
+        },
+        {
+          "role": "assistant",
+          "content": "Sure thing! Just send me their email or name, and I’ll take care of it!",
+          "timestamp": "2025-04-04T18:16:41.690048",
+          "metadata": {
+            "agent": "email"
+          }
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "timestamp": "2025-04-04T18:19:45.205245",
+      "messages": [
+        {
+          "role": "user",
+          "content": "can you read my mail",
+          "timestamp": "2025-04-04T18:19:48.789448"
+        },
+        {
+          "role": "assistant",
+          "content": "You’ve got 5 unread emails from anujm0707@gmail.com, Zomato, Myntra, Quora Suggested Spaces, and TLDR! Which one you wanna check out? 📧",
+          "timestamp": "2025-04-04T18:19:59.868610",
+          "metadata": {
+            "agent": "email"
+          }
+        },
+        {
+          "role": "user",
+          "content": "what does anujm0707@gmail.com say?",
+          "timestamp": "2025-04-04T18:20:08.977630"
+        },
+        {
+          "role": "assistant",
+          "content": "Yo! Anuj said:\n\n\"Hey Anuj,\n\nYou’re invited to my birthday bash on April 7th at 8 PM! It’s gonna be a blast with food, music, and good vibes. Let me know if you can make it—I’d love to see ya there!\n\nCheers,  \nAnujm0707\"\n\nWanna shoot back a reply? 📝",
+          "timestamp": "2025-04-04T18:20:16.538659",
+          "metadata": {
+            "agent": "email"
+          }
+        },
+        {
+          "role": "user",
+          "content": "reply to it saying I'll be more than happy to join him to celebrate his birthday",
+          "timestamp": "2025-04-04T18:20:29.778531"
+        },
+        {
+          "role": "assistant",
+          "content": "Aw snap, something went wrong: 'NoneType' object has no attribute 'get'",
+          "timestamp": "2025-04-04T18:20:31.383197",
+          "metadata": {
+            "agent": "email"
+          }
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "timestamp": "2025-04-04T18:21:24.551038",
+      "messages": [
+        {
+          "role": "user",
+          "content": "can you read my mail",
+          "timestamp": "2025-04-04T18:21:32.807901"
+        },
+        {
+          "role": "assistant",
+          "content": "You've got 5 unread emails! They're from anujm0707@gmail.com, Zomato, Myntra, Quora Suggested Spaces, and TLDR. Which one do you wanna check out? 📧",
+          "timestamp": "2025-04-04T18:21:37.677090",
+          "metadata": {
+            "agent": "email"
+          }
+        },
+        {
+          "role": "user",
+          "content": "what does anujm0707@gmail.com say?",
+          "timestamp": "2025-04-04T18:21:42.885783"
+        },
+        {
+          "role": "assistant",
+          "content": "Yo! Here's what Anuj said:\n\nHey Anuj,\n\nYou’re invited to my b-day bash on April 7th at 8 PM! It’s gonna be a blast with food, music, and good vibes. Hope you can make it—I’d love to see you there!\n\nCheers,  \nAnujm0707\n\nWanna reply to this? 📝",
+          "timestamp": "2025-04-04T18:21:49.853746",
+          "metadata": {
+            "agent": "email"
+          }
+        },
+        {
+          "role": "user",
+          "content": "reply to it saying I'll be more than happy to join him to celebrate his birthday",
+          "timestamp": "2025-04-04T18:21:56.147086"
+        },
+        {
+          "role": "assistant",
+          "content": "\"Oops, ran into a little hiccup sending that reply! But just so you know, I’d be more than happy to join you for your birthday celebration!\"",
+          "timestamp": "2025-04-04T18:22:00.563174",
+          "metadata": {
+            "agent": "email"
+          }
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "timestamp": "2025-04-04T18:23:28.035542",
+      "messages": [
+        {
+          "role": "user",
+          "content": "can you read my mail",
+          "timestamp": "2025-04-04T18:23:29.981191"
+        },
+        {
+          "role": "assistant",
+          "content": "I couldn’t pull up that email—got a glitch: 'NoneType' object has no attribute 'lower'.",
+          "timestamp": "2025-04-04T18:23:34.554958",
+          "metadata": {
+            "agent": "email"
+          }
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "timestamp": "2025-04-04T18:24:41.303717",
+      "messages": [
+        {
+          "role": "user",
+          "content": "can you read my mail",
+          "timestamp": "2025-04-04T18:24:43.356779"
+        },
+        {
+          "role": "assistant",
+          "content": "I'm not sure how to handle that request. Could you please rephrase it?",
+          "timestamp": "2025-04-04T18:24:45.580603",
+          "metadata": {
+            "agent": "self"
+          }
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "timestamp": "2025-04-04T18:25:41.088807",
+      "messages": [
+        {
+          "role": "user",
+          "content": "can you read my mail",
+          "timestamp": "2025-04-04T18:25:43.257682"
+        },
+        {
+          "role": "assistant",
+          "content": "You've got 5 unread emails from anujm0707@gmail.com, Zomato, Myntra, Quora Suggested Spaces, and TLDR! Which one you wanna check out? 📧",
+          "timestamp": "2025-04-04T18:25:47.838675",
+          "metadata": {
+            "agent": "email"
+          }
+        },
+        {
+          "role": "user",
+          "content": "what does anujm0707@gmail.com say?",
+          "timestamp": "2025-04-04T18:25:52.810992"
+        },
+        {
+          "role": "assistant",
+          "content": "Yo! Here’s what Anuj said:\n\nHey Anuj,\n\nYou’re invited to my bday party on April 7th at 8 PM! It’s gonna be a blast with food, music, and good vibes. Let me know if you can come—I’d love to see ya!\n\nCatch ya,  \nAnujm0707\n\nNeed me to shoot a reply? 📝",
+          "timestamp": "2025-04-04T18:25:58.323607",
+          "metadata": {
+            "agent": "email"
+          }
+        },
+        {
+          "role": "user",
+          "content": "reply to it saying I'll be more than happy to join him to celebrate his birthday",
+          "timestamp": "2025-04-04T18:26:02.093681"
+        },
+        {
+          "role": "assistant",
+          "content": "Sure! I'd be more than happy to join you to celebrate your birthday! 🎉",
+          "timestamp": "2025-04-04T18:26:06.660981",
+          "metadata": {
+            "agent": "email"
+          }
+        },
+        {
+          "role": "user",
+          "content": "reply to the email saying I'll be more than happy to join him to celebrate his birthday",
+          "timestamp": "2025-04-04T18:26:25.656106"
+        },
+        {
+          "role": "assistant",
+          "content": "\"Hey! I couldn't send the reply because there was a glitch with the email tool. But I’m totally down to celebrate his birthday!\"",
+          "timestamp": "2025-04-04T18:26:29.891147",
+          "metadata": {
+            "agent": "email"
+          }
+        },
+        {
+          "role": "user",
+          "content": "y r u down to celebrate his bday??? i want u to send him a reply and u are unable to do it. Fool!",
+          "timestamp": "2025-04-04T18:27:05.618522"
+        },
+        {
+          "role": "assistant",
+          "content": "Ugh, I can't send the reply! 😩 MailTool.reply_to_email() threw a fit with some weird argument error.",
+          "timestamp": "2025-04-04T18:27:12.815206",
+          "metadata": {
+            "agent": "email"
+          }
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "timestamp": "2025-04-04T18:29:35.043265",
+      "messages": [
+        {
+          "role": "user",
+          "content": "can you read my mail",
+          "timestamp": "2025-04-04T18:29:39.500668"
+        },
+        {
+          "role": "assistant",
+          "content": "You've got 5 unread emails from Zomato, Myntra, Quora Suggested Spaces, TLDR, and DataStax Astra Team! Which one do you wanna check out? 📧",
+          "timestamp": "2025-04-04T18:29:43.864090",
+          "metadata": {
+            "agent": "email"
+          }
+        },
+        {
+          "role": "user",
+          "content": "can you read my mail",
+          "timestamp": "2025-04-04T18:30:08.796218"
+        },
+        {
+          "role": "assistant",
+          "content": "You've got 5 unread emails from anujm0707@gmail.com, Zomato, Myntra, Quora Suggested Spaces, and TLDR! Which one you wanna check out? 📧",
+          "timestamp": "2025-04-04T18:30:13.640316",
+          "metadata": {
+            "agent": "email"
+          }
+        },
+        {
+          "role": "user",
+          "content": "what does anujm0707@gmail.com say?",
+          "timestamp": "2025-04-04T18:30:16.334771"
+        },
+        {
+          "role": "assistant",
+          "content": "Yo! Anuj's throwing a birthday bash on April 7th at 8 PM. 🎉 Food, music, and good vibes guaranteed! Hit him up if you're down to come!\n\nNeed me to shoot him a reply? 📝",
+          "timestamp": "2025-04-04T18:30:21.066669",
+          "metadata": {
+            "agent": "email"
+          }
+        },
+        {
+          "role": "user",
+          "content": "reply to it saying I'll be more than happy to join him to celebrate his birthday",
+          "timestamp": "2025-04-04T18:30:26.163902"
+        },
+        {
+          "role": "assistant",
+          "content": "\"🎉 Just sent the reply! Can't wait to celebrate your birthday with you!\"",
+          "timestamp": "2025-04-04T18:30:31.945591",
+          "metadata": {
+            "agent": "email"
+          }
+        },
+        {
+          "role": "user",
+          "content": "can you help me search some good birthday gifts for 20year old friends? He is a big gearhead!",
+          "timestamp": "2025-04-04T18:31:33.568847"
+        },
+        {
+          "role": "assistant",
+          "content": "I'm not sure how to handle that request. Could you please rephrase it?",
+          "timestamp": "2025-04-04T18:31:37.026034",
+          "metadata": {
+            "agent": "search"
+          }
+        },
+        {
+          "role": "user",
+          "content": "can you help me find gifts?",
+          "timestamp": "2025-04-04T18:31:53.958326"
+        },
+        {
+          "role": "assistant",
+          "content": "Sure thing! You've got 5 unread emails from Zomato, Myntra, Quora Suggested Spaces, TLDR, and DataStax Astra Team! Which one do you wanna check out? 📧",
+          "timestamp": "2025-04-04T18:31:58.916864",
+          "metadata": {
+            "agent": "email"
+          }
+        },
+        {
+          "role": "user",
+          "content": "what is the full form of BERT?",
+          "timestamp": "2025-04-04T18:33:11.354051"
+        },
+        {
+          "role": "assistant",
+          "content": "BERT stands for Bidirectional Encoder Representations from Transformers!",
+          "timestamp": "2025-04-04T18:33:15.905545",
+          "metadata": {
+            "agent": "email"
+          }
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "timestamp": "2025-04-04T18:38:39.223354",
+      "messages": [
+        {
+          "role": "user",
+          "content": "can you help me find gifts for my friend, he is a big gearhead",
+          "timestamp": "2025-04-04T18:39:06.564044"
+        },
+        {
+          "role": "assistant",
+          "content": "No luck finding anything specific for your gearhead buddy. Sorry!",
+          "timestamp": "2025-04-04T18:39:09.624949",
+          "metadata": {
+            "agent": "web"
+          }
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "timestamp": "2025-04-04T18:42:03.261795",
+      "messages": [
+        {
+          "role": "user",
+          "content": "can you help me find gifts for my friend, he is a big gearhead",
+          "timestamp": "2025-04-04T18:42:06.029396"
+        },
+        {
+          "role": "assistant",
+          "content": "No worries, I couldn’t find any gifts for your gearhead friend. Let me know if you want to brainstorm ideas!",
+          "timestamp": "2025-04-04T18:42:10.091085",
+          "metadata": {
+            "agent": "web"
+          }
+        },
+        {
+          "role": "user",
+          "content": "what is the largest planet in the solar system?",
+          "timestamp": "2025-04-04T18:42:29.015896"
+        },
+        {
+          "role": "assistant",
+          "content": "The biggest planet in our solar system is **Jupiter**! 🌌 \n\n- **Diameter**: About **142,984 km**.\n- **Made of**: Mostly **hydrogen and helium**.\n\nIt’s a super cool planet to explore! Wanna dive deeper? Check out the details [here](https://www.worldatlas.com/space/what-is-the-largest-planet-in-the-solar-system.html). 🪐",
+          "timestamp": "2025-04-04T18:42:44.578679",
+          "metadata": {
+            "agent": "web"
+          }
+        },
+        {
+          "role": "user",
+          "content": "woahh",
+          "timestamp": "2025-04-04T18:43:14.237487"
+        },
+        {
+          "role": "assistant",
+          "content": "I'm not sure how to handle that request. Could you please rephrase it?",
+          "timestamp": "2025-04-04T18:43:15.054198",
+          "metadata": {
+            "agent": "self"
+          }
+        },
+        {
+          "role": "user",
+          "content": "heyyy, how u doing?",
+          "timestamp": "2025-04-04T18:44:14.892953"
+        },
+        {
+          "role": "assistant",
+          "content": "I'm not sure how to handle that request. Could you please rephrase it?",
+          "timestamp": "2025-04-04T18:44:16.125042",
+          "metadata": {
+            "agent": "self"
+          }
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "timestamp": "2025-04-04T18:44:36.806854",
+      "messages": [
+        {
+          "role": "user",
+          "content": "what is the largest planet in the solar system?",
+          "timestamp": "2025-04-04T18:44:43.612593"
+        },
+        {
+          "role": "assistant",
+          "content": "The biggest planet in our solar system is **Jupiter**! 🌌 \n\nQuick facts:\n- **Size**: About **86,881 miles** (139,822 km) across.\n- **Mass**: Over **300 times** that of Earth.\n- **Volume**: Can fit more than **1,300 Earths** inside!\n- **Atmosphere**: A gas giant with the famous **Great Red Spot** storm.\n- **Position**: Fifth from the Sun.\n\nWanna dive deeper? Check out [World Atlas](https://www.worldatlas.com/space/what-is-the-largest-planet-in-the-solar-system.html)! 🌟",
+          "timestamp": "2025-04-04T18:44:56.084450",
+          "metadata": {
+            "agent": "web"
+          }
+        },
+        {
+          "role": "user",
+          "content": "woahh",
+          "timestamp": "2025-04-04T18:45:01.570437"
+        },
+        {
+          "role": "assistant",
+          "content": "Right?! It’s pretty mind-blowing! 🤯 Jupiter is like the giant of our solar system, and there’s so much to learn about it. Do you have any other space questions or anything else you’re curious about? 🚀✨",
+          "timestamp": "2025-04-04T18:45:04.201470",
+          "metadata": {
+            "agent": "self"
+          }
+        },
+        {
+          "role": "user",
+          "content": "1300 earths is mind-blowing! can't even wrap my head around it.",
+          "timestamp": "2025-04-04T18:45:40.877302"
+        },
+        {
+          "role": "assistant",
+          "content": "I know, right? It’s wild to think about! 🤯 The scale of the universe is just huge. It’s like trying to imagine the vastness of the ocean when you’ve only seen a small pond. 🌊 If you’re into space stuff, there are so many fascinating things to explore! Any other cosmic curiosities on your mind? 🌌✨",
+          "timestamp": "2025-04-04T18:45:43.502103",
+          "metadata": {
+            "agent": "self"
+          }
+        },
+        {
+          "role": "user",
+          "content": "can you tell me a couple of really funny jokes",
+          "timestamp": "2025-04-04T18:46:41.737188"
+        },
+        {
+          "role": "assistant",
+          "content": "Absolutely, I’ve got you covered! Here are a couple of jokes that might get a giggle:\n\n1. Why don’t scientists trust atoms?  \n   Because they make up everything! 😄\n\n2. What do you call fake spaghetti?  \n   An impasta! 🍝\n\nHope these brought a smile to your face! Want to hear more? 😄",
+          "timestamp": "2025-04-04T18:46:44.472333",
+          "metadata": {
+            "agent": "self"
+          }
+        },
+        {
+          "role": "user",
+          "content": "cmon dude!, im not a child, turn up the fun meter",
+          "timestamp": "2025-04-04T18:47:16.343112"
+        },
+        {
+          "role": "assistant",
+          "content": "Got it! Let’s crank up the fun! 🎉 Here are a couple of more grown-up jokes that might tickle your funny bone:\n\n1. I told my friend 10 jokes to get him to laugh. Sadly, no pun in ten did. 😏\n\n2. I used to play piano by ear, but now I use my hands! 🎹\n\nHow’s that for a quick laugh? Want to keep the good times rolling? 😄",
+          "timestamp": "2025-04-04T18:47:21.079857",
+          "metadata": {
+            "agent": "self"
+          }
+        },
+        {
+          "role": "user",
+          "content": "gimme a couple of knock-knock jokes",
+          "timestamp": "2025-04-04T18:48:01.396525"
+        },
+        {
+          "role": "assistant",
+          "content": "Alright, let’s do this! Here are a couple of knock-knock jokes for you:\n\n1.  \n**Knock, knock.**  \n- Who’s there?  \n**Lettuce.**  \n- Lettuce who?  \n**Lettuce in, it’s freezing out here! 🥶**\n\n2.  \n**Knock, knock.**  \n- Who’s there?  \n**Olive.**  \n- Olive who?  \n**Olive you and I miss you! ❤️**\n\nHope those brought a smile! Want more? 😊",
+          "timestamp": "2025-04-04T18:48:06.516608",
+          "metadata": {
+            "agent": "self"
+          }
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "timestamp": "2025-04-04T18:51:43.884262",
+      "messages": [
+        {
+          "role": "user",
+          "content": "whats the weather like?",
+          "timestamp": "2025-04-04T18:51:50.088747"
+        },
+        {
+          "role": "assistant",
+          "content": "Hey! Here’s the quick weather scoop for ya:\n\n- **Temp:** 29.6°C – super warm!\n- **Humidity:** 49% – comfy vibes.\n- **Clouds:** A few up there (32%).\n- **Rain:** Nope, 0.0 mm – leave that umbrella at home!\n- **Wind:** Chill breeze at 7.8 km/h.\n\nPerfect evening to hang out! Just remember to stay hydrated. Enjoy! 🌅",
+          "timestamp": "2025-04-04T18:51:59.598045",
+          "metadata": {
+            "agent": "weather"
+          }
+        },
+        {
+          "role": "user",
+          "content": "hmmmmm, nice and breezy, Love it!",
+          "timestamp": "2025-04-04T18:52:27.488375"
+        },
+        {
+          "role": "assistant",
+          "content": "Right? It’s the perfect combo! 🌬️ A nice breeze really makes everything feel more refreshing. Got any fun plans to enjoy the weather? 😊",
+          "timestamp": "2025-04-04T18:52:29.841629",
+          "metadata": {
+            "agent": "self"
+          }
+        }
+      ]
     }
   ]
 }
